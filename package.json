@@ -1,0 +1,21 @@
+{
+  "name": "npm-basic",
+  "version": "0.0.1",
+  "description": "Start a project from scratch",
+  "scripts": {
+    "prestart": "mkdir -p dist && mkdir -p dist/html/ && mkdir -p dist/css",
+    "start": "webpack-dev-server --progress --colors --devtool eval",
+    "clean": "rm -fr dist/",
+    "build": "webpack --progress --colors"
+  },
+  "author": "Robb Charnock",
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.3",
+    "html-webpack-plugin": "^2.21.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
