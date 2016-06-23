@@ -1,9 +1,9 @@
 "use strict";
 require("../css/style.css");
-import * as main from "./Nav";
+import Nav from "./Nav";
 
 const mainElement = $("main");
-const nav = new main.Nav((pageName) => {
+const nav = new Nav((pageName) => {
   switch (pageName) {
     case "one":
       mainElement.text(require("./pageOne.js"));

@@ -1,4 +1,4 @@
-export class Nav {
+export default class Nav {
   constructor (callback) {
     this.nav = $("nav");
 
