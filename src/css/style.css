@@ -1,3 +1,24 @@
-body {
-  background: blue;
+nav {
+  width: 500px;
+  height: 100px;
+  user-select: none;
+
+  ul {
+    border: 1px solid darkgrey;
+    width:100%;
+    padding:0;
+    display: inline-block;
+    li {
+      float: left;
+      text-align: center;
+      list-style-type: none;
+      width: 50%;
+      cursor: pointer;
+      background-color: lightgrey;
+
+      &.active {
+        background-color: white;
+      }
+    }
+  }
 }
