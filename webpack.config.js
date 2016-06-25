@@ -10,7 +10,6 @@ const autoprefixer = require('autoprefixer');
 // webpack config
 const devserverConfig = require('./webpack.config.devserver.js');
 const minifyConfig = require('./webpack.config.minify.js');
-
 const PATHS = {
   src: path.join(__dirname, 'src'),
   dist: path.join(__dirname, 'dist')
@@ -26,36 +25,32 @@ const config = {
     filename: 'js/[name].[chunkhash].js'
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.(js|jsx)?$/,
-        loaders: ['eslint'],
-        include: PATHS.src
+    preLoaders: [{
+      test: /\.(js|jsx)?$/,
+      loaders: ['eslint'],
+      include: PATHS.src
+    }],
+    loaders: [{
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
+    }, {
+      test: /\.png$/,
+      loader: 'file-loader?name=/images/[name].[ext]'
+    }, {
+      test: /\.html$/,
+      loader: 'html-loader'
+    }, {
+      test: /\.js$/,
+      include: path.join(__dirname, 'src'),
+      loader: 'babel-loader',
+      query: {
+        presets: ['es2015'],
+        cacheDirectory: true
       }
-    ],
-    loaders: [
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
-      }, {
-        test: /\.png$/,
-        loader: 'file-loader?name=/images/[name].[ext]' 
-      }, {
-        test: /\.html$/,
-        loader: 'html-loader'
-      }, { 
-        test: /\.js$/,
-        include: path.join(__dirname, 'src'),
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015'],
-          cacheDirectory: true
-        }
-      }
-    ]
+    }]
   },
-  postcss: function () {
-      return [precss, autoprefixer];
+  postcss: function() {
+    return [precss, autoprefixer];
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -72,25 +67,18 @@ const config = {
   ]
 };
 
-switch(process.env.npm_lifecycle_event) {
+switch (process.env.npm_lifecycle_event) {
   case 'dev':
-    config = merge(
-      config,
-      {
-        devtool: 'source-map'
-      },
-      devserverConfig({
-        // Customize host/port here if needed
-        host: process.env.HOST,
-        port: process.env.PORT
-      })
-    );
+    config = merge(config, {
+      devtool: 'source-map'
+    }, devserverConfig({
+      // Customize host/port here if needed
+      host: process.env.HOST,
+      port: process.env.PORT
+    }));
     break;
   case 'build':
-    config = merge(
-      config,
-      minifyConfig()
-    );
+    config = merge(config, minifyConfig());
     break;
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "npm-basic",
+  "name": "webpack-setup",
   "version": "0.0.1",
   "description": "Start a project from scratch",
   "scripts": {
